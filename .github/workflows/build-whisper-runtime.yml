@@ -1,6 +1,8 @@
 name: Build Whisper runtime artifact
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
