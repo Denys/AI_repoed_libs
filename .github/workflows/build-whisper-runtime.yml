@@ -24,19 +24,19 @@ jobs:
           tar -xzf whisper-bin.tar.gz -C runtime
           find runtime -maxdepth 3 -type f -print
 
-      - name: Download multilingual base Q5_1 model
+      - name: Download multilingual small Q5_1 model
         run: |
           set -euxo pipefail
           curl -L --fail --retry 5 \
-            -o runtime/ggml-base-q5_1.bin \
-            https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base-q5_1.bin
-          test -s runtime/ggml-base-q5_1.bin
-          sha256sum runtime/ggml-base-q5_1.bin
+            -o runtime/ggml-small-q5_1.bin \
+            https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small-q5_1.bin
+          test -s runtime/ggml-small-q5_1.bin
+          sha256sum runtime/ggml-small-q5_1.bin
 
       - name: Upload runtime
         uses: actions/upload-artifact@v4
         with:
-          name: whisper-runtime-linux-x64-base-q5_1
+          name: whisper-runtime-linux-x64-small-q5_1
           path: runtime/
           retention-days: 1
           if-no-files-found: error
