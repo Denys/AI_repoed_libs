@@ -33,10 +33,19 @@ jobs:
           test -s runtime/ggml-small-q5_1.bin
           sha256sum runtime/ggml-small-q5_1.bin
 
+      - name: Download Silero VAD model
+        run: |
+          set -euxo pipefail
+          curl -L --fail --retry 5 \
+            -o runtime/ggml-silero-v6.2.0.bin \
+            https://huggingface.co/ggml-org/whisper-vad/resolve/main/ggml-silero-v6.2.0.bin
+          test -s runtime/ggml-silero-v6.2.0.bin
+          sha256sum runtime/ggml-silero-v6.2.0.bin
+
       - name: Upload runtime
         uses: actions/upload-artifact@v4
         with:
-          name: whisper-runtime-linux-x64-small-q5_1
+          name: whisper-runtime-linux-x64-small-q5_1-vad
           path: runtime/
           retention-days: 1
           if-no-files-found: error
